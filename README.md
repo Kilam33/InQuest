@@ -1,2 +1,0 @@
-# InQuest
-Search, Cite, Excel 
