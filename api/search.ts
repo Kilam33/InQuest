@@ -29,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const { q, limit = 10 } = req.body;
-  const apiKey = process.env.VITE_CORE_API_KEY;
+  const apiKey = process.env.VITE_CORE_API_KEY || process.env.CORE_API_KEY;
 
   if (!q) {
     return res.status(400).json({ error: 'Query parameter is required' });
