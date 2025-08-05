@@ -33,10 +33,12 @@ const SearchComponent = ({ isDark, onSearchResults }: SearchProps) => {
 
     try {
       // Always use Vercel API route for consistency
+      console.log('Making request to /api/search with query:', query);
       const response = await axios.post('/api/search', {
         q: query,
         limit: 10,
       });
+      console.log('Response received:', response.data);
 
       const results = response.data.results.map((item: any) => ({
         id: item.id,
