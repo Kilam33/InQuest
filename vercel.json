@@ -27,8 +27,5 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "VITE_CORE_API_KEY": "@core_api_key"
-  }
+  ]
 } 
