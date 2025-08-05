@@ -1,6 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('API route hit:', req.method, req.url);
+  
   // Enable CORS with proper origin handling
   const allowedOrigins = [
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://in-quest-ten.vercel.app',
