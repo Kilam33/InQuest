@@ -3,7 +3,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Enable CORS with proper origin handling
   const allowedOrigins = [
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://in-quest-sepia.vercel.app/',
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://in-quest-sepia.vercel.app',
     'http://localhost:5222', // For local development
     'http://localhost:3000', // Alternative local dev port
   ];
