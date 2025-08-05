@@ -2,14 +2,11 @@
 import React from 'react';
 import { Brain, Moon, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface HeaderProps {
-  isDark: boolean;
-  setIsDark: (isDark: boolean) => void;
-}
-
-const Header = ({ isDark, setIsDark }: HeaderProps) => {
+const Header = () => {
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -24,7 +21,7 @@ const Header = ({ isDark, setIsDark }: HeaderProps) => {
         </div>
         <div className="flex items-center gap-6">
           <button
-            onClick={() => setIsDark(!isDark)}
+            onClick={toggleTheme}
             className={`p-2 rounded-full ${isDark ? 'bg-gray-800 text-yellow-400' : 'bg-gray-100 text-gray-600'}`}
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}

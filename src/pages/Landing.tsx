@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchComponent from '../components/Search';
 import Header from '../components/Header';
 import Footer from '../components/Footer'; // Import the Footer component
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Article {
   id: string;
@@ -19,7 +20,7 @@ interface Article {
 }
 
 const Landing = () => {
-  const [isDark, setIsDark] = useState(false);
+  const { isDark } = useTheme();
   const [searchResults, setSearchResults] = useState<Article[]>([]);
   const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ const Landing = () => {
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Use the Header component */}
-      <Header isDark={isDark} setIsDark={setIsDark} />
+      <Header />
 
       {/* Hero Section with Search */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

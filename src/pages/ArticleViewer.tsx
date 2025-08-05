@@ -7,6 +7,7 @@ import {
   FileInput, FileOutput, Search, List
 } from 'lucide-react';
 import Header from '../components/Header';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface Article {
   id: string;
@@ -32,6 +33,7 @@ interface Note {
 const ArticleViewer = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
   const [article, setArticle] = useState<Article | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -40,7 +42,6 @@ const ArticleViewer = () => {
   const [selectedText, setSelectedText] = useState('');
   const [aiInsightsOpen, setAiInsightsOpen] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
-  const [isDark, setIsDark] = useState(false);
   const [highlightedText, setHighlightedText] = useState<string[]>([]);
   const [citationFormat, setCitationFormat] = useState('apa');
   const [relatedArticles, setRelatedArticles] = useState<Article[]>([]);
@@ -141,7 +142,7 @@ const ArticleViewer = () => {
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       {/* Header */}
-      <Header isDark={isDark} setIsDark={setIsDark} />
+      <Header />
 
       {/* Progress Tracker */}
       <div className={`fixed top-20 right-4 w-48 p-4 rounded-lg shadow-lg ${isDark ? 'bg-gray-800' : 'bg-white'}`}>

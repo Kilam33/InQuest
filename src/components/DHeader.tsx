@@ -5,14 +5,10 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
+import { useTheme } from '../contexts/ThemeContext';
 
-interface HeaderProps {
-  isDark: boolean;
-  setIsDark: (isDark: boolean) => void;
-}
-
-
-const Header = ({ isDark, setIsDark }: HeaderProps) => {
+const Header = () => {
+  const { isDark, toggleTheme } = useTheme();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [unreadNotifications] = useState(3); // Mock unread notifications count
   const [showNotifications, setShowNotifications] = useState(false);
@@ -66,7 +62,7 @@ const Header = ({ isDark, setIsDark }: HeaderProps) => {
           <div className="flex items-center space-x-6">
             {/* Dark Mode Toggle */}
             <button
-              onClick={() => setIsDark(!isDark)}
+              onClick={toggleTheme}
               className={`p-2 rounded-full ${
                 isDark ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}

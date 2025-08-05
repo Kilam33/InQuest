@@ -32,13 +32,25 @@ const SearchComponent = ({ isDark, onSearchResults }: SearchProps) => {
     setError('');
 
     try {
-      const response = await axios.get('https://api.core.ac.uk/v3/search/works', {
-        params: {
+      let response;
+      
+      // Use Vite proxy in development, Vercel API route in production
+      if (import.meta.env.DEV) {
+        // Development: Use Vite proxy
+        response = await axios.get('/api/core/v3/search/works', {
+          params: {
+            q: query,
+            apiKey: import.meta.env.VITE_CORE_API_KEY,
+            limit: 10,
+          },
+        });
+      } else {
+        // Production: Use Vercel API route
+        response = await axios.post('/api/search', {
           q: query,
-          apiKey: import.meta.env.VITE_CORE_API_KEY,
-          limit: 10, // Number of results to fetch
-        },
-      });
+          limit: 10,
+        });
+      }
 
       const results = response.data.results.map((item: any) => ({
         id: item.id,

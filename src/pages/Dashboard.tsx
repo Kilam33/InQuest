@@ -7,20 +7,39 @@ import {
   FilePlus, TrendingUp, AlertCircle, CheckCircle,
   GitBranch, Hash, Table, Link2, PenTool,
   Network, LineChart, Database, Beaker,
-  FileText2, BookMarked, Calendar, Quote,
+  BookMarked, Calendar, Quote,
   ClipboardList, ArrowRight, Download, Send, Tag, Bell, Settings, PieChart, FileInput, Shield, Cloud, Smartphone
 } from 'lucide-react';
 import SearchComponent from '../components/Search';
 import Header from '../components/DHeader';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
+import { useTheme } from '../contexts/ThemeContext';
 
+interface Article {
+  id: string;
+  title: string;
+  authors: string[];
+  publishedDate: string;
+  citations: number;
+  abstract: string;
+  journal: string;
+  doi: string;
+  subjects: string[];
+  downloadUrl: string;
+}
+
+interface Message {
+  id: number;
+  text: string;
+  timestamp: Date;
+}
 
 const Dashboard = () => {
-  const [isDark, setIsDark] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  const { isDark } = useTheme();
+  const [searchResults, setSearchResults] = useState<Article[]>([]);
   const [selectedFormat, setSelectedFormat] = useState('apa');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const navigate = useNavigate();
 
@@ -179,12 +198,12 @@ const Dashboard = () => {
   ];
 
   // Handle search results
-  const handleSearchResults = (results) => {
+  const handleSearchResults = (results: Article[]) => {
     setSearchResults(results);
   };
 
   // Handle article click
-  const handleArticleClick = (article) => {
+  const handleArticleClick = (article: Article) => {
     navigate('/article', { state: { article } });
   };
 
@@ -200,7 +219,7 @@ const Dashboard = () => {
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <Header isDark={isDark} setIsDark={setIsDark} />
+      <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
